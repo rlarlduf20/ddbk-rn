@@ -1,5 +1,10 @@
-import WebView from "react-native-webview";
+import { WebView } from "react-native-webview";
 
 export default function TabTwoScreen() {
-  return <WebView source={{ uri: "https://ddbk.vercel.app/map" }} />;
+  return (
+    <WebView
+      source={{ uri: "http://192.168.1.4:3000/map" }}
+      onMessage={() => {}}
+    />
+  );
 }

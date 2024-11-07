@@ -1,68 +1,20 @@
 import { WebView, WebViewMessageEvent } from "react-native-webview";
 import * as Location from "expo-location";
-import { Alert, Linking } from "react-native";
+import { Alert } from "react-native";
 import { useRef } from "react";
+import useLocationPermission from "@/hooks/useLocationPermission";
 
 export default function TabTwoScreen() {
   const webViewRef = useRef<WebView>(null);
 
-  const checkLocation = async () => {
-    const isEnabled = await Location.hasServicesEnabledAsync();
-
-    if (!isEnabled) {
-      Alert.alert(
-        "위치 서비스 사용",
-        '위치 서비스를 사용할 수 없습니다. "설정 > 개인 정보 보호 및 보안" 에서 위치 서비스를 켜주세요.',
-        [
-          { text: "취소" },
-          {
-            text: "설정으로 이동",
-            onPress: () => {
-              Linking.openSettings();
-            },
-          },
-        ],
-        { cancelable: false }
-      );
-      return false;
-    }
-    return true;
-  };
-  const requestPermissions = async () => {
-    const { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== "granted") {
-      Alert.alert(
-        "위치 정보 접근 거부",
-        "위치 권한이 필요합니다.",
-        [
-          { text: "취소" },
-          {
-            text: "설정으로 이동",
-            onPress: () => {
-              Linking.openSettings();
-            },
-          },
-        ],
-        { cancelable: false }
-      );
-      return false;
-    }
-    return true;
-  };
+  const { checkLocation, requestPermissions } = useLocationPermission();
 
   const getLocation = async () => {
     try {
-      await Location.watchPositionAsync(
-        {
-          distanceInterval: 1,
-        },
-        (location) => {
-          const { latitude, longitude } = location.coords;
-          webViewRef.current?.postMessage(
-            JSON.stringify({ latitude, longitude })
-          );
-        }
-      );
+      const {
+        coords: { latitude, longitude },
+      } = await Location.getCurrentPositionAsync();
+      webViewRef.current?.postMessage(JSON.stringify({ latitude, longitude }));
     } catch {
       Alert.alert("위치 정보를 받아오는데 오류가 발생했습니다.");
     }
@@ -87,7 +39,7 @@ export default function TabTwoScreen() {
   return (
     <WebView
       ref={webViewRef}
-      source={{ uri: "http://192.168.0.10:3000/map" }}
+      source={{ uri: "https://ddbk.vercel.app/map" }}
       onMessage={handleMessage}
     />
   );

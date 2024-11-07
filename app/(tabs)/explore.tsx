@@ -63,8 +63,8 @@ export default function TabTwoScreen() {
           );
         }
       );
-    } catch (error) {
-      console.error(error);
+    } catch {
+      Alert.alert("위치 정보를 받아오는데 오류가 발생했습니다.");
     }
   };
 

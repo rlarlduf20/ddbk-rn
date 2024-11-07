@@ -78,6 +78,8 @@ export default function TabTwoScreen() {
 
         const permissionsGranted = await requestPermissions();
         if (!permissionsGranted) return;
+
+        getLocation();
       }
     }
   };

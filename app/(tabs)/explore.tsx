@@ -3,11 +3,13 @@ import * as Location from "expo-location";
 import { Alert } from "react-native";
 import { useRef } from "react";
 import useLocationPermission from "@/hooks/useLocationPermission";
+import useTracking from "@/hooks/useTracking";
 
 export default function TabTwoScreen() {
   const webViewRef = useRef<WebView>(null);
 
   const { checkLocation, requestPermissions } = useLocationPermission();
+  const { startTracking, stopTracking } = useTracking({ webViewRef });
 
   const getLocation = async () => {
     try {
@@ -32,6 +34,15 @@ export default function TabTwoScreen() {
         if (!permissionsGranted) return;
 
         getLocation();
+        break;
+      }
+      case "START_TRACKING": {
+        startTracking();
+        break;
+      }
+      case "STOP_TRACKING": {
+        stopTracking();
+        break;
       }
     }
   };

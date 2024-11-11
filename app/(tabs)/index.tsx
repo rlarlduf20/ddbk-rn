@@ -56,7 +56,7 @@ export default function HomeScreen() {
   return (
     <WebView
       ref={webViewRef}
-      source={{ uri: "http://192.168.0.6:3000" }}
+      source={{ uri: "http://192.168.1.4:3000" }}
       onMessage={handleMessage}
     />
   );

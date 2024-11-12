@@ -3,14 +3,13 @@ import * as Location from "expo-location";
 import { Alert } from "react-native";
 import { useRef } from "react";
 import useLocationPermission from "@/hooks/useLocationPermission";
-import useTracking from "@/hooks/useTracking";
 import { useRouter } from "expo-router";
+import { WEBVIEW_URL } from "@/constants/WebView";
 
 export default function HomeScreen() {
   const webViewRef = useRef<WebView>(null);
 
   const { checkLocation, requestPermissions } = useLocationPermission();
-  const { startTracking, stopTracking } = useTracking({ webViewRef });
 
   const router = useRouter();
 
@@ -39,14 +38,6 @@ export default function HomeScreen() {
         getLocation();
         break;
       }
-      case "START_TRACKING": {
-        startTracking();
-        break;
-      }
-      case "STOP_TRACKING": {
-        stopTracking();
-        break;
-      }
       case "STACK_TRACKING": {
         router.push("/tracking");
       }
@@ -56,7 +47,7 @@ export default function HomeScreen() {
   return (
     <WebView
       ref={webViewRef}
-      source={{ uri: "http://192.168.0.6:3000" }}
+      source={{ uri: `${WEBVIEW_URL}` }}
       onMessage={handleMessage}
     />
   );

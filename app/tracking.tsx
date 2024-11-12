@@ -5,6 +5,7 @@ import { useRef } from "react";
 import useLocationPermission from "@/hooks/useLocationPermission";
 import * as Location from "expo-location";
 import { Alert } from "react-native";
+import { WEBVIEW_URL } from "@/constants/WebView";
 
 const TrackingScreen = () => {
   const router = useRouter();
@@ -46,10 +47,6 @@ const TrackingScreen = () => {
         stopTracking();
         break;
       }
-      case "STACK_TRACKING": {
-        router.push("/tracking");
-        break;
-      }
       case "STACK_REVIEW": {
         router.push("/review");
         break;
@@ -60,7 +57,7 @@ const TrackingScreen = () => {
   return (
     <WebView
       ref={webViewRef}
-      source={{ uri: "http://192.168.1.4:3000/tracking" }}
+      source={{ uri: `${WEBVIEW_URL}/tracking` }}
       onMessage={handleMessage}
     />
   );

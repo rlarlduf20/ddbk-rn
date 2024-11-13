@@ -11,7 +11,7 @@ const TrackingScreen = () => {
   const router = useRouter();
   const webViewRef = useRef<WebView>(null);
 
-  const { checkLocation, requestPermissions } = useLocationPermission();
+  const { checkLocationService, requestPermissions } = useLocationPermission();
   const { startTracking, stopTracking } = useTracking({ webViewRef });
 
   const getLocation = async () => {
@@ -30,7 +30,7 @@ const TrackingScreen = () => {
 
     switch (message.type) {
       case "REQUEST_GPS_PERMISSIONS": {
-        const servicesEnabled = await checkLocation();
+        const servicesEnabled = await checkLocationService();
         if (!servicesEnabled) return;
 
         const permissionsGranted = await requestPermissions();

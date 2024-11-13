@@ -2,7 +2,7 @@ import * as Location from "expo-location";
 import { Alert, Linking } from "react-native";
 
 const useLocationPermission = () => {
-  const checkLocation = async () => {
+  const checkLocationService = async () => {
     const isEnabled = await Location.hasServicesEnabledAsync();
 
     if (!isEnabled) {
@@ -20,6 +20,13 @@ const useLocationPermission = () => {
         ],
         { cancelable: false }
       );
+      return false;
+    }
+    return true;
+  };
+  const checkPermissions = async () => {
+    const { status } = await Location.getForegroundPermissionsAsync();
+    if (status !== "granted") {
       return false;
     }
     return true;
@@ -47,7 +54,7 @@ const useLocationPermission = () => {
     return true;
   };
 
-  return { checkLocation, requestPermissions };
+  return { checkLocationService, checkPermissions, requestPermissions };
 };
 
 export default useLocationPermission;

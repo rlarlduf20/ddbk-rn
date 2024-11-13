@@ -30,10 +30,20 @@ export default function HomeScreen() {
     switch (message.type) {
       case "REQUEST_GPS_PERMISSIONS": {
         const servicesEnabled = await checkLocation();
-        if (!servicesEnabled) return;
+        if (!servicesEnabled) {
+          webViewRef.current?.postMessage(
+            JSON.stringify({ text: "REJECT_PERMISSIONS" })
+          );
+          return;
+        }
 
         const permissionsGranted = await requestPermissions();
-        if (!permissionsGranted) return;
+        if (!permissionsGranted) {
+          webViewRef.current?.postMessage(
+            JSON.stringify({ text: "REJECT_PERMISSIONS" })
+          );
+          return;
+        }
 
         getLocation();
         break;

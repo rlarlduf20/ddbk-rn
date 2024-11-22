@@ -2,9 +2,13 @@ import { WebView, WebViewMessageEvent } from "react-native-webview";
 import { useRef } from "react";
 import useLocationPermission from "@/hooks/useLocationPermission";
 import { WEBVIEW_URL } from "@/constants/WebView";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "expo-router";
+import { CommonActions } from "@react-navigation/native";
 
 export default function MyScreen() {
   const webViewRef = useRef<WebView>(null);
+  const navigation = useNavigation();
 
   const { checkLocationService, checkPermissions, requestPermissions } =
     useLocationPermission();
@@ -37,15 +41,28 @@ export default function MyScreen() {
         webViewRef.current?.postMessage(
           JSON.stringify({ isLocationService, isPermissions })
         );
+        break;
+      }
+      case "LOG_OUT": {
+        await AsyncStorage.removeItem("isLoggedIn");
+
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [{ name: "/" }], // 초기화 후 이동할 경로
+          })
+        );
       }
     }
   };
 
   return (
-    <WebView
-      ref={webViewRef}
-      source={{ uri: `${WEBVIEW_URL}/mypage` }}
-      onMessage={handleMessage}
-    />
+    <>
+      <WebView
+        ref={webViewRef}
+        source={{ uri: `${WEBVIEW_URL}/mypage` }}
+        onMessage={handleMessage}
+      />
+    </>
   );
 }

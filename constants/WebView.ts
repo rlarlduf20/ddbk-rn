@@ -1,1 +1,1 @@
-export const WEBVIEW_URL = "https://ddbk.vercel.app";
+export const WEBVIEW_URL = "http://192.168.0.20:3000";

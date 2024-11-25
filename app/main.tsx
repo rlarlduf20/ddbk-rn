@@ -14,7 +14,6 @@ export default function HomeScreen() {
     useLocationPermission();
 
   const router = useRouter();
-
   const getLocation = async () => {
     try {
       const {
@@ -51,7 +50,7 @@ export default function HomeScreen() {
         break;
       }
       case "STACK_TRACKING": {
-        router.push("/tracking");
+        router.replace("/tracking");
         break;
       }
       case "GPS_PERMISSION_STATE": {

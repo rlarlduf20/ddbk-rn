@@ -10,7 +10,7 @@ const ReviewScreen = () => {
     if (data.type === "COMPLETE_REVIEW") {
       navigation.dispatch(
         CommonActions.reset({
-          routes: [{ key: "(tabs)", name: "(tabs)" }],
+          routes: [{ key: "main", name: "main" }],
         })
       );
     }

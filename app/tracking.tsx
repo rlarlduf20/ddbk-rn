@@ -32,10 +32,8 @@ const TrackingScreen = () => {
       case "REQUEST_GPS_PERMISSIONS": {
         const servicesEnabled = await checkLocationService();
         if (!servicesEnabled) return;
-
         const permissionsGranted = await requestPermissions();
         if (!permissionsGranted) return;
-
         getLocation();
         break;
       }
@@ -48,7 +46,7 @@ const TrackingScreen = () => {
         break;
       }
       case "STACK_REVIEW": {
-        router.push("/review");
+        router.replace("/review");
         break;
       }
     }

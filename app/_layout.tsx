@@ -36,7 +36,10 @@ export default function RootLayout() {
           name="index"
           options={{ headerShown: false, gestureEnabled: false }}
         />
-        <Stack.Screen name="main" options={{ headerShown: false }} />
+        {/* <Stack.Screen
+          name="main"
+          options={{ headerShown: false, gestureEnabled: false }}
+        /> */}
         <Stack.Screen
           name="tracking"
           options={{ headerShown: false, gestureEnabled: false }}

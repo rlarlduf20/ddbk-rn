@@ -2,14 +2,14 @@ import { WebView, WebViewMessageEvent } from "react-native-webview";
 import { useRouter } from "expo-router";
 import { WEBVIEW_URL } from "@/constants/WebView";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import useLocationPermission from "@/hooks/useLocationPermission";
 import { Alert } from "react-native";
 import * as Location from "expo-location";
 
 const SettingScreen = () => {
   const router = useRouter();
-
+  const [webviewKey, setWebviewKey] = useState<string>("");
   const webViewRef = useRef<WebView>(null);
 
   const { checkLocationService, checkPermissions, requestPermissions } =
@@ -28,9 +28,9 @@ const SettingScreen = () => {
 
   const handleMessage = async (event: WebViewMessageEvent) => {
     const message = JSON.parse(event.nativeEvent.data);
+    console.log(message);
     switch (message.type) {
       case "LOG_OUT": {
-        await AsyncStorage.removeItem("isLoggedIn");
         router.replace("/");
         break;
       }
@@ -66,9 +66,15 @@ const SettingScreen = () => {
       }
     }
   };
+
+  useEffect(() => {
+    setWebviewKey((prevKey) => prevKey + "setting");
+  }, []);
+
   return (
     <WebView
-      key="setting"
+      key={webviewKey}
+      ref={webViewRef}
       source={{ uri: `${WEBVIEW_URL}/setting` }}
       onMessage={handleMessage}
     />

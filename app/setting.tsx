@@ -1,19 +1,20 @@
 import { WebView, WebViewMessageEvent } from "react-native-webview";
-import * as Location from "expo-location";
-import { Alert } from "react-native";
-import { useRef } from "react";
-import useLocationPermission from "@/hooks/useLocationPermission";
 import { useRouter } from "expo-router";
 import { WEBVIEW_URL } from "@/constants/WebView";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect, useRef, useState } from "react";
+import useLocationPermission from "@/hooks/useLocationPermission";
+import { Alert } from "react-native";
+import * as Location from "expo-location";
 
-export default function HomeScreen() {
+const SettingScreen = () => {
+  const router = useRouter();
+  const [webviewKey, setWebviewKey] = useState<string>("");
   const webViewRef = useRef<WebView>(null);
 
   const { checkLocationService, checkPermissions, requestPermissions } =
     useLocationPermission();
 
-  const router = useRouter();
   const getLocation = async () => {
     try {
       const {
@@ -27,8 +28,12 @@ export default function HomeScreen() {
 
   const handleMessage = async (event: WebViewMessageEvent) => {
     const message = JSON.parse(event.nativeEvent.data);
-
+    console.log(message);
     switch (message.type) {
+      case "LOG_OUT": {
+        router.replace("/");
+        break;
+      }
       case "REQUEST_GPS_PERMISSIONS": {
         const servicesEnabled = await checkLocationService();
         if (!servicesEnabled) {
@@ -49,31 +54,31 @@ export default function HomeScreen() {
         getLocation();
         break;
       }
-      case "STACK_TRACKING": {
-        router.replace("/tracking");
-        break;
-      }
+
       case "GPS_PERMISSION_STATE": {
         const isLocationService = await checkLocationService();
         const isPermissions = await checkPermissions();
+
         webViewRef.current?.postMessage(
           JSON.stringify({ isLocationService, isPermissions })
         );
         break;
       }
-      case "LOG_OUT": {
-        await AsyncStorage.removeItem("isLoggedIn");
-
-        router.replace("/");
-      }
     }
   };
 
+  useEffect(() => {
+    setWebviewKey((prevKey) => prevKey + "setting");
+  }, []);
+
   return (
     <WebView
+      key={webviewKey}
       ref={webViewRef}
-      source={{ uri: `${WEBVIEW_URL}` }}
+      source={{ uri: `${WEBVIEW_URL}/setting` }}
       onMessage={handleMessage}
     />
   );
-}
+};
+
+export default SettingScreen;

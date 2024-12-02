@@ -17,6 +17,7 @@ const ReviewScreen = () => {
   };
   return (
     <WebView
+      key="review"
       source={{ uri: `${WEBVIEW_URL}/review` }}
       onMessage={handleMessage}
     />

@@ -18,7 +18,6 @@ const useTracking = ({ webViewRef }: Props) => {
           distanceInterval: 1,
         },
         (location) => {
-          console.log(location);
           const { latitude, longitude } = location.coords;
           webViewRef.current?.postMessage(
             JSON.stringify({ latitude, longitude })

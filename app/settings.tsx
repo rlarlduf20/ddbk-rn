@@ -28,7 +28,6 @@ const SettingScreen = () => {
 
   const handleMessage = async (event: WebViewMessageEvent) => {
     const message = JSON.parse(event.nativeEvent.data);
-    console.log(message);
     switch (message.type) {
       case "LOG_OUT": {
         router.replace("/");

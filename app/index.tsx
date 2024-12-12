@@ -64,8 +64,14 @@ export default function HomeScreen() {
       }
 
       case "STACK_NAVIGATION": {
-        const path = message.path;
-        router.push(path);
+        const { path, method } = message;
+        if (method === "back") {
+          router.back();
+        } else if (method === "reset") {
+          router.replace(path);
+        } else {
+          router.push(path);
+        }
       }
     }
   };

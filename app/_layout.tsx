@@ -48,7 +48,8 @@ export default function RootLayout() {
           name="review"
           options={{ headerShown: false, gestureEnabled: false }}
         />
-        <Stack.Screen name="setting" options={{ headerShown: false }} />
+        <Stack.Screen name="settings" options={{ headerShown: false }} />
+        <Stack.Screen name="id-login/index" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
     </ThemeProvider>

@@ -74,7 +74,7 @@ const SettingScreen = () => {
     <WebView
       key={webviewKey}
       ref={webViewRef}
-      source={{ uri: `${WEBVIEW_URL}/setting` }}
+      source={{ uri: `${WEBVIEW_URL}/settings` }}
       onMessage={handleMessage}
     />
   );

@@ -45,9 +45,15 @@ const TrackingScreen = () => {
         stopTracking();
         break;
       }
-      case "STACK_REVIEW": {
-        router.replace("/review");
-        break;
+      case "STACK_NAVIGATION": {
+        const { path, method } = message;
+        if (method === "back") {
+          router.back();
+        } else if (method === "reset") {
+          router.replace(path);
+        } else {
+          router.push(path);
+        }
       }
     }
   };

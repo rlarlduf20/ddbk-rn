@@ -75,7 +75,7 @@ const useLocationPermission = () => {
         navigation.dispatch(
           CommonActions.reset({
             index: 0,
-            routes: [{ key: "(tabs)", name: "(tabs)" }],
+            routes: [{ key: "index", name: "index" }],
           })
         );
       }

@@ -24,6 +24,7 @@ const ReviewScreen = () => {
         source={{ uri: `${WEBVIEW_URL}/review` }}
         onMessage={handleMessage}
         injectedJavaScript={disableZoomJS}
+        style={{ backgroundColor: "#F0F0EE" }}
       />
     </View>
   );

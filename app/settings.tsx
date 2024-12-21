@@ -79,6 +79,7 @@ const SettingScreen = () => {
         source={{ uri: `${WEBVIEW_URL}/settings` }}
         onMessage={handleMessage}
         injectedJavaScript={disableZoomJS}
+        style={{ backgroundColor: "#F0F0EE" }}
       />
     </View>
   );

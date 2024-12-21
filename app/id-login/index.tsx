@@ -36,6 +36,7 @@ const IdLoginScreen = () => {
         key={webviewKey}
         source={{ uri: `${WEBVIEW_URL}/id-login` }}
         onMessage={handleMessage}
+        style={{ backgroundColor: "#F0F0EE" }}
         injectedJavaScript={disableZoomJS}
       />
     </View>

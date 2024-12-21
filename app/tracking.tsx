@@ -66,6 +66,7 @@ const TrackingScreen = () => {
         source={{ uri: `${WEBVIEW_URL}/tracking` }}
         onMessage={handleMessage}
         injectedJavaScript={disableZoomJS}
+        style={{ backgroundColor: "#F0F0EE" }}
       />
     </View>
   );

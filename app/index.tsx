@@ -1,6 +1,6 @@
 import { WebView, WebViewMessageEvent } from "react-native-webview";
 import * as Location from "expo-location";
-import { Alert } from "react-native";
+import { Alert, SafeAreaView, View } from "react-native";
 import { useEffect, useRef, useState } from "react";
 import useLocationPermission from "@/hooks/useLocationPermission";
 import { useRouter } from "expo-router";
@@ -81,13 +81,14 @@ export default function HomeScreen() {
   }, []);
 
   return (
-    <>
+    <View style={{ flex: 1 }}>
+      <SafeAreaView style={{ backgroundColor: "#f0f0ee" }} />
       <WebView
         key={webviewKey}
         ref={webViewRef}
         source={{ uri: `${WEBVIEW_URL}` }}
         onMessage={handleMessage}
       />
-    </>
+    </View>
   );
 }

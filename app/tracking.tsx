@@ -4,7 +4,7 @@ import useTracking from "@/hooks/useTracking";
 import { useRef } from "react";
 import useLocationPermission from "@/hooks/useLocationPermission";
 import * as Location from "expo-location";
-import { Alert } from "react-native";
+import { Alert, SafeAreaView, View } from "react-native";
 import { WEBVIEW_URL } from "@/constants/WebView";
 
 const TrackingScreen = () => {
@@ -59,11 +59,14 @@ const TrackingScreen = () => {
   };
 
   return (
-    <WebView
-      ref={webViewRef}
-      source={{ uri: `${WEBVIEW_URL}/tracking` }}
-      onMessage={handleMessage}
-    />
+    <View style={{ flex: 1 }}>
+      <SafeAreaView style={{ backgroundColor: "#f0f0ee" }} />
+      <WebView
+        ref={webViewRef}
+        source={{ uri: `${WEBVIEW_URL}/tracking` }}
+        onMessage={handleMessage}
+      />
+    </View>
   );
 };
 

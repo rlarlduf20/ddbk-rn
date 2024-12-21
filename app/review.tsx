@@ -2,6 +2,7 @@ import { WebView, WebViewMessageEvent } from "react-native-webview";
 import { useNavigation } from "expo-router";
 import { CommonActions } from "@react-navigation/native";
 import { WEBVIEW_URL } from "@/constants/WebView";
+import { SafeAreaView, View } from "react-native";
 
 const ReviewScreen = () => {
   const navigation = useNavigation();
@@ -16,11 +17,14 @@ const ReviewScreen = () => {
     }
   };
   return (
-    <WebView
-      key="review"
-      source={{ uri: `${WEBVIEW_URL}/review` }}
-      onMessage={handleMessage}
-    />
+    <View style={{ flex: 1 }}>
+      <SafeAreaView style={{ backgroundColor: "#f0f0ee" }} />
+      <WebView
+        key="review"
+        source={{ uri: `${WEBVIEW_URL}/review` }}
+        onMessage={handleMessage}
+      />
+    </View>
   );
 };
 

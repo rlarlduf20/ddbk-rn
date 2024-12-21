@@ -1,6 +1,7 @@
 import { WEBVIEW_URL } from "@/constants/WebView";
 import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
+import { SafeAreaView, View } from "react-native";
 import WebView, { WebViewMessageEvent } from "react-native-webview";
 
 const IdLoginScreen = () => {
@@ -29,11 +30,14 @@ const IdLoginScreen = () => {
   }, []);
 
   return (
-    <WebView
-      key={webviewKey}
-      source={{ uri: `${WEBVIEW_URL}/id-login` }}
-      onMessage={handleMessage}
-    />
+    <View style={{ flex: 1 }}>
+      <SafeAreaView style={{ backgroundColor: "#f0f0ee" }} />
+      <WebView
+        key={webviewKey}
+        source={{ uri: `${WEBVIEW_URL}/id-login` }}
+        onMessage={handleMessage}
+      />
+    </View>
   );
 };
 

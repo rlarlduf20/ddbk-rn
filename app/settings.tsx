@@ -4,7 +4,7 @@ import { WEBVIEW_URL } from "@/constants/WebView";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useRef, useState } from "react";
 import useLocationPermission from "@/hooks/useLocationPermission";
-import { Alert } from "react-native";
+import { Alert, SafeAreaView, View } from "react-native";
 import * as Location from "expo-location";
 
 const SettingScreen = () => {
@@ -71,12 +71,15 @@ const SettingScreen = () => {
   }, []);
 
   return (
-    <WebView
-      key={webviewKey}
-      ref={webViewRef}
-      source={{ uri: `${WEBVIEW_URL}/settings` }}
-      onMessage={handleMessage}
-    />
+    <View style={{ flex: 1 }}>
+      <SafeAreaView style={{ backgroundColor: "#f0f0ee" }} />
+      <WebView
+        key={webviewKey}
+        ref={webViewRef}
+        source={{ uri: `${WEBVIEW_URL}/settings` }}
+        onMessage={handleMessage}
+      />
+    </View>
   );
 };
 

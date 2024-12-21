@@ -1,6 +1,6 @@
 import { WebView, WebViewMessageEvent } from "react-native-webview";
 import { useRouter } from "expo-router";
-import { WEBVIEW_URL } from "@/constants/WebView";
+import { disableZoomJS, WEBVIEW_URL } from "@/constants/WebView";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useRef, useState } from "react";
 import useLocationPermission from "@/hooks/useLocationPermission";
@@ -78,6 +78,7 @@ const SettingScreen = () => {
         ref={webViewRef}
         source={{ uri: `${WEBVIEW_URL}/settings` }}
         onMessage={handleMessage}
+        injectedJavaScript={disableZoomJS}
       />
     </View>
   );

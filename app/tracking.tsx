@@ -5,7 +5,7 @@ import { useRef } from "react";
 import useLocationPermission from "@/hooks/useLocationPermission";
 import * as Location from "expo-location";
 import { Alert, SafeAreaView, View } from "react-native";
-import { WEBVIEW_URL } from "@/constants/WebView";
+import { disableZoomJS, WEBVIEW_URL } from "@/constants/WebView";
 
 const TrackingScreen = () => {
   const router = useRouter();
@@ -65,6 +65,7 @@ const TrackingScreen = () => {
         ref={webViewRef}
         source={{ uri: `${WEBVIEW_URL}/tracking` }}
         onMessage={handleMessage}
+        injectedJavaScript={disableZoomJS}
       />
     </View>
   );

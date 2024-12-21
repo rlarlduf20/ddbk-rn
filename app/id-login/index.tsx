@@ -1,4 +1,4 @@
-import { WEBVIEW_URL } from "@/constants/WebView";
+import { disableZoomJS, WEBVIEW_URL } from "@/constants/WebView";
 import { useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView, View } from "react-native";
@@ -36,6 +36,7 @@ const IdLoginScreen = () => {
         key={webviewKey}
         source={{ uri: `${WEBVIEW_URL}/id-login` }}
         onMessage={handleMessage}
+        injectedJavaScript={disableZoomJS}
       />
     </View>
   );

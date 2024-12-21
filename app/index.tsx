@@ -4,7 +4,7 @@ import { Alert, SafeAreaView, View } from "react-native";
 import { useEffect, useRef, useState } from "react";
 import useLocationPermission from "@/hooks/useLocationPermission";
 import { useRouter } from "expo-router";
-import { WEBVIEW_URL } from "@/constants/WebView";
+import { disableZoomJS, WEBVIEW_URL } from "@/constants/WebView";
 
 export default function HomeScreen() {
   const webViewRef = useRef<WebView>(null);
@@ -86,8 +86,10 @@ export default function HomeScreen() {
       <WebView
         key={webviewKey}
         ref={webViewRef}
+        injectedJavaScript={disableZoomJS}
         source={{ uri: `${WEBVIEW_URL}` }}
         onMessage={handleMessage}
+        style={{ backgroundColor: "#F0F0EE" }}
       />
     </View>
   );

@@ -1,7 +1,7 @@
 import { WebView, WebViewMessageEvent } from "react-native-webview";
 import { useNavigation } from "expo-router";
 import { CommonActions } from "@react-navigation/native";
-import { WEBVIEW_URL } from "@/constants/WebView";
+import { disableZoomJS, WEBVIEW_URL } from "@/constants/WebView";
 import { SafeAreaView, View } from "react-native";
 
 const ReviewScreen = () => {
@@ -23,6 +23,7 @@ const ReviewScreen = () => {
         key="review"
         source={{ uri: `${WEBVIEW_URL}/review` }}
         onMessage={handleMessage}
+        injectedJavaScript={disableZoomJS}
       />
     </View>
   );

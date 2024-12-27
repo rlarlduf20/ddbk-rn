@@ -1,4 +1,4 @@
-export const WEBVIEW_URL = "http://10.50.9.31:3000";
+export const WEBVIEW_URL = "https://ddbk.vercel.app";
 
 export const disableZoomJS = `
     const meta = document.createElement('meta');

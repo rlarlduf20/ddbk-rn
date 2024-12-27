@@ -1,4 +1,4 @@
-export const WEBVIEW_URL = "http://172.30.1.41:3000";
+export const WEBVIEW_URL = "http://10.50.9.31:3000";
 
 export const disableZoomJS = `
     const meta = document.createElement('meta');
